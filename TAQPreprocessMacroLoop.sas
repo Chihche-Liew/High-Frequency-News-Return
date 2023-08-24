@@ -9,14 +9,14 @@ run;
 
 	proc sql noprint;
         select distinct input(substr(string, 3), yymmdd8.) into :date_list separated by ' ' from taq_tables;
-      quit;
+      	quit;
 	
 	%let n_dates=%sysfunc(countw(&date_list));
 	%let prev_year = .;
 
-    %do i = 1 %to &n_dates;
+    	%do i = 1 %to &n_dates;
 
-	  %let date=%scan(&date_list, &i);
+	%let date=%scan(&date_list, &i);
         %let year=%sysfunc(year(&date));
         %let filename=ct%sysfunc(putn(&date, yymmddn8.));
 		
@@ -110,9 +110,9 @@ run;
 		    select
         		a.symbol,
         		a.datetime,
-				trade,
-				volume,
-				wvprice
+			trade,
+			volume,
+			wvprice
     		from
         		ret_sorted as a
     		left join
@@ -124,7 +124,7 @@ run;
         		a.symbol,
         		a.datetime
 			having
-				b.datetime = max(b.datetime);
+			b.datetime = max(b.datetime);
 		quit;
 		
 		/* concat data by year */
